@@ -3,7 +3,7 @@
   //env.PATH = "${tool 'Maven3'}/bin:${env.PATH}"
   agent any
   stages{
-        stage('Package') {
+        stage('Build') {
               steps{
                 bat 'mvn clean package -DskipTests'
               }              
