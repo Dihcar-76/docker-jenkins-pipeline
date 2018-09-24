@@ -5,7 +5,9 @@
   stages{
         stage('Package') {
             dir('webapp') {
-              bat 'mvn clean package -DskipTests'
+              steps{
+                bat 'mvn clean package -DskipTests'
+              }              
             }
           }
 
