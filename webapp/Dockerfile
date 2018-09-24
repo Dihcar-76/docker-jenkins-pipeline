@@ -5,7 +5,7 @@
 //CMD java -jar /opt/webapp-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 FROM openjdk:7
-COPY . /webapp/src/main/java/org/example
+COPY /webapp/src/main/java/org/example /webapp/src/main/java/org/example
 WORKDIR /webapp/src/main/java/org/example
 RUN javac Main.java
 CMD ["java", "Main"]
