@@ -1,6 +1,6 @@
  pipeline {//node
   //checkout scm
-  //env.PATH = "${tool 'Maven3'}/bin:${env.PATH}"
+  env.PATH = "${tool 'Maven3'}/bin:${env.PATH}"
   agent any
   stages{
         stage('Build') {
