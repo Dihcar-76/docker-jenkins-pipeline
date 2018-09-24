@@ -5,12 +5,14 @@
   stages{
         stage('Build') {
               steps{
+                bat 'cd /webapp'
                 bat 'mvn clean package -DskipTests'
               }              
           }
 
           stage('Create Docker Image') {
             steps{
+                bat 'cd /webapp'
                 bat'docker.build("rbougrin/docker-jenkins-pipeline:${env.BUILD_NUMBER}")'
             }
           }
@@ -33,6 +35,7 @@
 
           stage('Run Tests') {
             steps {
+                bat 'cd /webapp'
                 bat "mvn test"
                 bat'docker.build("rbougrin/docker-jenkins-pipeline:${env.BUILD_NUMBER}").push()'
             } 
