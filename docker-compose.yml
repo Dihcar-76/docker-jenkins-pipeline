@@ -2,7 +2,7 @@ version: '2'
 
 services:
   db:
-    image: rbougrin/oreilly-couchbase
+    image: db
     ports:
       - 8091:8091
       - 8092:8092
