@@ -11,7 +11,7 @@
 
           stage('Create Docker Image') {
             steps{
-                docker.build("rbougrin/docker-jenkins-pipeline:${env.BUILD_NUMBER}")
+                bat'docker.build("rbougrin/docker-jenkins-pipeline:${env.BUILD_NUMBER}")'
             }
           }
 
@@ -34,7 +34,7 @@
           stage('Run Tests') {
             steps {
                 bat "mvn test"
-                docker.build("rbougrin/docker-jenkins-pipeline:${env.BUILD_NUMBER}").push()
+                bat'docker.build("rbougrin/docker-jenkins-pipeline:${env.BUILD_NUMBER}").push()'
             } 
           }
   }
