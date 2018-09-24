@@ -4,17 +4,13 @@
   agent any
   stages{
         stage('Package') {
-            dir('webapp') {
               steps{
                 bat 'mvn clean package -DskipTests'
               }              
-            }
           }
 
           stage('Create Docker Image') {
-            dir('webapp') {
               docker.build("rbougrin/docker-jenkins-pipeline:${env.BUILD_NUMBER}")
-            }
           }
 
           stage ('Run Application') {
@@ -23,8 +19,8 @@
               // sh 'docker run -d --name db -p 8091-8093:8091-8093 -p 11210:11210 arungupta/oreilly-couchbase:latest'
 
               // Run application using Docker image
-              sh "DB=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
-              sh "docker run -e DB_URI=$DB rbougrin/docker-jenkins-pipeline:${env.BUILD_NUMBER}"
+              bat "DB=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
+              bat "docker run -e DB_URI=$DB rbougrin/docker-jenkins-pipeline:${env.BUILD_NUMBER}"
 
               // Run tests using Maven
               //dir ('webapp') {
@@ -40,10 +36,8 @@
 
           stage('Run Tests') {
             try {
-              dir('webapp') {
                 bat "mvn test"
                 docker.build("rbougrin/docker-jenkins-pipeline:${env.BUILD_NUMBER}").push()
-              }
             } catch (error) {
 
             } finally {
