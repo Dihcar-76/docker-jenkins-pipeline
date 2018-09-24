@@ -21,7 +21,7 @@
               // sh 'docker run -d --name db -p 8091-8093:8091-8093 -p 11210:11210 arungupta/oreilly-couchbase:latest'
 
               // Run application using Docker image
-              bat "DB=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
+              bat "DB=`docker inspect --format='{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
               bat "docker run -e DB_URI=$DB rbougrin/docker-jenkins-pipeline:${env.BUILD_NUMBER}"
 
               // Run tests using Maven
